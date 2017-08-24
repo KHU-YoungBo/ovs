@@ -1150,11 +1150,14 @@ cmd_emer_reset(struct ctl_context *ctx)
 static void
 cmd_add_br(struct ctl_context *ctx)
 {
+    static const char deafult_mfr_desc[] = "Nicira, Inc.";
+
     struct vsctl_context *vsctl_ctx = vsctl_context_cast(ctx);
     bool may_exist = shash_find(&ctx->options, "--may-exist") != NULL;
     const char *br_name, *parent_name;
     struct ovsrec_interface *iface;
     int vlan;
+    const char *mfr_desc = shash_find_data(&ctx->options, "--mfr-desc");
 
     br_name = ctx->argv[1];
     if (!br_name[0]) {
@@ -1223,6 +1226,8 @@ cmd_add_br(struct ctl_context *ctx)
         br = ovsrec_bridge_insert(ctx->txn);
         ovsrec_bridge_set_name(br, br_name);
         ovsrec_bridge_set_ports(br, &port, 1);
+
+        ovsrec_bridge_set_mfr_desc(br, mfr_desc ? mfr_desc : deafult_mfr_desc);
 
         ovs_insert_bridge(vsctl_ctx->ovs, br);
     } else {
@@ -2725,7 +2730,7 @@ static const struct ctl_command_syntax vsctl_commands[] = {
 
     /* Bridge commands. */
     {"add-br", 1, 3, "NEW-BRIDGE [PARENT] [NEW-VLAN]", pre_get_info,
-     cmd_add_br, NULL, "--may-exist", RW},
+     cmd_add_br, NULL, "--may-exist,--mfr-desc=", RW},
     {"del-br", 1, 1, "BRIDGE", pre_get_info, cmd_del_br,
      NULL, "--if-exists", RW},
     {"list-br", 0, 0, "", pre_get_info, cmd_list_br, NULL, "--real,--fake",
