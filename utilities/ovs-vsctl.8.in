@@ -180,7 +180,7 @@ as-is.
 .SS "Bridge Commands"
 These commands examine and manipulate Open vSwitch bridges.
 .
-.IP "[\fB\-\-may\-exist\fR] \fBadd\-br \fIbridge\fR"
+.IP "[\fB\-\-may\-exist\fR] [\fB\-\-mfr\-desc\fR=\fImanufacturer\fR] \fBadd\-br \fIbridge\fR"
 Creates a new bridge named \fIbridge\fR.  Initially the bridge will
 have no ports (other than \fIbridge\fR itself).
 .IP

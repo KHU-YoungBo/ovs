@@ -465,7 +465,7 @@ ofproto_bump_tables_version(struct ofproto *ofproto)
 }
 
 int
-ofproto_create(const char *datapath_name, const char *datapath_type,
+ofproto_create(const char *datapath_name, const char *datapath_type, const char *mfr_desc,
                struct ofproto **ofprotop)
     OVS_EXCLUDED(ofproto_mutex)
 {
@@ -502,7 +502,7 @@ ofproto_create(const char *datapath_name, const char *datapath_type,
     ofproto->datapath_id = 0;
     ofproto->forward_bpdu = false;
     ofproto->fallback_dpid = pick_fallback_dpid();
-    ofproto->mfr_desc = NULL;
+    ofproto->mfr_desc = mfr_desc[0] == '\0' ? NULL : xstrdup(mfr_desc);
     ofproto->hw_desc = NULL;
     ofproto->sw_desc = NULL;
     ofproto->serial_desc = NULL;
@@ -3688,7 +3688,6 @@ static enum ofperr
 handle_desc_stats_request(struct ofconn *ofconn,
                           const struct ofp_header *request)
 {
-    static const char *default_mfr_desc = "Nicira, Inc.";
     static const char *default_hw_desc = "Open vSwitch";
     static const char *default_sw_desc = VERSION;
     static const char *default_serial_desc = "None";
@@ -3700,7 +3699,7 @@ handle_desc_stats_request(struct ofconn *ofconn,
 
     msg = ofpraw_alloc_stats_reply(request, 0);
     ods = ofpbuf_put_zeros(msg, sizeof *ods);
-    ovs_strlcpy(ods->mfr_desc, p->mfr_desc ? p->mfr_desc : default_mfr_desc,
+    ovs_strlcpy(ods->mfr_desc, p->mfr_desc,
                 sizeof ods->mfr_desc);
     ovs_strlcpy(ods->hw_desc, p->hw_desc ? p->hw_desc : default_hw_desc,
                 sizeof ods->hw_desc);

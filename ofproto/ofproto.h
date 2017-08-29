@@ -240,7 +240,7 @@ void ofproto_init(const struct shash *iface_hints);
 int ofproto_type_run(const char *datapath_type);
 void ofproto_type_wait(const char *datapath_type);
 
-int ofproto_create(const char *datapath, const char *datapath_type,
+int ofproto_create(const char *datapath, const char *datapath_type, const char *mfr_desc,
                    struct ofproto **ofprotop)
     OVS_EXCLUDED(ofproto_mutex);
 void ofproto_destroy(struct ofproto *, bool del);

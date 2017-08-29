@@ -670,6 +670,7 @@ flood_vlans         : []
 flow_tables         : {}
 ipfix               : []
 mcast_snooping_enable: false
+mfr_desc            : ""
 mirrors             : []
 name                : "br0"
 netflow             : []
@@ -1172,6 +1173,7 @@ flood_vlans         : []
 flow_tables         : {}
 ipfix               : []
 mcast_snooping_enable: false
+mfr_desc            : ""
 mirrors             : []
 name                : "br0"
 netflow             : []
