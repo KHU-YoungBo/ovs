@@ -1,6 +1,6 @@
 {"name": "Open_vSwitch",
- "version": "7.3.0",
- "cksum": "2483452374 20182",
+ "version": "7.3.1",
+ "cksum": "1713322743 20231",
  "tables": {
    "Open_vSwitch": {
      "columns": {
@@ -52,6 +52,8 @@
        "datapath_id": {
          "type": {"key": "string", "min": 0, "max": 1},
          "ephemeral": true},
+       "mfr_desc": {
+         "type": "string"},
        "stp_enable": {
          "type": "boolean"},
        "ports": {

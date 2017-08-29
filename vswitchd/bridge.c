@@ -707,7 +707,7 @@ bridge_update_ofprotos(void)
             }
         }
 
-        error = ofproto_create(br->name, br->type, &br->ofproto);
+        error = ofproto_create(br->name, br->type, br->cfg->mfr_desc, &br->ofproto);
         if (error) {
             VLOG_ERR("failed to create bridge %s: %s", br->name,
                      ovs_strerror(error));
