@@ -180,13 +180,17 @@ as-is.
 .SS "Bridge Commands"
 These commands examine and manipulate Open vSwitch bridges.
 .
-.IP "[\fB\-\-may\-exist\fR] \fBadd\-br \fIbridge\fR"
+.IP "[\fB\-\-may\-exist\fR] [\fB\-\-mfr\-desc\fR=\fImanufacturer\fR] \fBadd\-br \fIbridge\fR"
 Creates a new bridge named \fIbridge\fR.  Initially the bridge will
 have no ports (other than \fIbridge\fR itself).
 .IP
 Without \fB\-\-may\-exist\fR, attempting to create a bridge that
 exists is an error.  With \fB\-\-may\-exist\fR, this command does
 nothing if \fIbridge\fR already exists as a real bridge.
+.IP
+Without \fB\-\-mfr\-desc\fR, attempting to create a bridge that
+has a deafult manufacturer name, usually "Nicira, Inc.". With \fB\-\-mfr\-desc\fR,
+attempting to create a bridge that has the manufacturer name with \fImanufacturer\fR.
 .
 .IP "[\fB\-\-may\-exist\fR] \fBadd\-br \fIbridge parent vlan\fR"
 Creates a ``fake bridge'' named \fIbridge\fR within the existing Open

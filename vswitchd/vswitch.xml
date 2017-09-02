@@ -810,6 +810,12 @@
         </p>
       </column>
 
+      <column name="mfr_desc">
+        <p>
+          Reports the OpenFlow manufacturer description in use.(255 Bytes)
+        </p>
+      </column>
+
       <column name="datapath_id">
         Reports the OpenFlow datapath ID in use.  Exactly 16 hex digits.
         (Setting this column has no useful effect.  Set <ref
